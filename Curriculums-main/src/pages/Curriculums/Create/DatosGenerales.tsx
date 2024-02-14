@@ -1,11 +1,72 @@
 
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const phoneRegex = /^[0-9]{10}$/;
+const cpRegex = /^\d{5}$/;
+const onlyLettersRegex = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
+const lettersAndNumbersRegex = /^[A-Za-z0-9\s]+$/;
+
+
+
 export default function DatosGenerales({ setData, setTab, data }: { setData: any, setTab: any, data: any }) {
 
     function handleChange(e: any) {
         const { name, value } = e.target
+        let isValid = true;
         //@ts-ignore
         setData(prev => ({ ...prev, [name]: value }))
+        
+        if (name === 'email') {
+            isValid = validateEmail(value);
+            setData((prev: any) => ({ ...prev, emailIsValid: isValid }));
+        } else if (name === 'celular') {
+            isValid = validatePhone(value);
+            setData((prev: any) => ({ ...prev, phoneIsValid: isValid }));
+        } else if (name === 'cp') {
+            isValid = validateCP(value);
+            setData((prev: any) => ({ ...prev, cpIsValid: isValid }));
+        } else if (name === 'nombre') {
+            isValid = validateNombre(value);
+            setData((prev: any) => ({ ...prev, nombreIsValid: isValid }));
+        } else if (name === 'apellido') {
+            isValid = validateApellido(value);
+            setData((prev: any) => ({ ...prev, apellidoIsValid: isValid }));
+        } else if (name === 'calle') {
+            isValid = validateCalle(value);
+            setData((prev: any) => ({ ...prev, calleIsValid: isValid }));
+        } else if (name === 'colonia') {
+            isValid = validateColonia(value);
+            setData((prev: any) => ({ ...prev, coloniaIsValid: isValid }));
+        }
+
+        
     }
+
+
+    function validateEmail(email: string) {
+        return emailRegex.test(email);
+    }
+    function validatePhone(phone: string) {
+        return phoneRegex.test(phone);
+    }
+    function validateCP(cp: string) {
+        return cpRegex.test(cp);
+    }
+    function validateNombre(nombre: string) {
+        return onlyLettersRegex.test(nombre);
+    }
+    function validateApellido(apellido: string) {
+        return onlyLettersRegex.test(apellido);
+    }
+    function validateColonia(colonia: string) {
+        return onlyLettersRegex.test(colonia);
+    }
+    function validateCalle(calle: string) {
+        return lettersAndNumbersRegex.test(calle);
+    }
+    
+    
+
+    
 
     return (
         <div>
@@ -18,18 +79,21 @@ export default function DatosGenerales({ setData, setTab, data }: { setData: any
                         <label htmlFor="nombre" className="block text-sm font-semibold leading-6 text-gray-900">Nombre(s)</label>
                         <div className="mt-2.5">
                             <input type="text" name="nombre" onChange={handleChange} id="nombre" value={data.nombre} className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                            {!data.nombreIsValid && <p className="text-red-500">Ingrese un nombre válido</p>}
                         </div>
                     </div>
                     <div className='sm:col-span-3 col-span-6'>
                         <label htmlFor="apellido" className="block text-sm font-semibold leading-6 text-gray-900">Apellido(s)</label>
                         <div className="mt-2.5">
                             <input type="text" name="apellido" onChange={handleChange} id="apellido" value={data.apellido} className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                            {!data.apellidoIsValid && <p className="text-red-500">Ingrese un apellido válido</p>}
                         </div>
                     </div>
                     <div className='col-span-6'>
                         <label htmlFor="email" className="block text-sm font-semibold leading-6 text-gray-900">Email</label>
                         <div className="mt-2.5">
                             <input type="email" name="email" onChange={handleChange} id="email" value={data.email} className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                            {!data.emailIsValid && <p className="text-red-500">Ingrese un email válido</p>}
                         </div>
                     </div>
                     <div className='col-span-6'>
@@ -48,23 +112,27 @@ export default function DatosGenerales({ setData, setTab, data }: { setData: any
                             </div>
                             <input type="tel" name="celular" onChange={handleChange} id="phone-number" value={data.celular} className="block w-full rounded-md border-0 px-3.5 py-2 pl-20 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                         </div>
+                        {!data.phoneIsValid && <p className="text-red-500">Ingrese un telefono válido</p>}
                     </div>
                     <div className="sm:col-span-2">
                         <label htmlFor="calle" className="block text-sm font-semibold leading-6 text-gray-900">Calle</label>
                         <div className="mt-2.5">
                             <input type="text" name="calle" onChange={handleChange} id="calle" value={data.calle} className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                            {!data.calleIsValid && <p className="text-red-500">Ingrese una calle válida</p>}
                         </div>
                     </div>
                     <div className="sm:col-span-2">
                         <label htmlFor="colonia" className="block text-sm font-semibold leading-6 text-gray-900">Colonia</label>
                         <div className="mt-2.5">
                             <input type="text" name="colonia" onChange={handleChange} id="colonia" value={data.colonia} className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                            {!data.coloniaIsValid && <p className="text-red-500">Ingrese una colonia válida</p>}
                         </div>
                     </div>
                     <div className="sm:col-span-2">
                         <label htmlFor="cp" className="block text-sm font-semibold leading-6 text-gray-900">Código postal</label>
                         <div className="mt-2.5">
                             <input type="text" name="cp" onChange={handleChange} id="cp" value={data.cp} className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                            {!data.cpIsValid && <p className="text-red-500">Ingrese un Codigo Postal válido</p>}
                         </div>
                     </div>
                     <div className="sm:col-span-3">
