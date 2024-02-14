@@ -10,6 +10,7 @@ import CreateCurriculum from './pages/Curriculums/Create/index.tsx';
 import Home from './pages/Home/index.tsx';
 import CurriculumsView from './pages/Curriculums/View/index.tsx';
 import EditarCurriculum from './pages/Curriculums/Edit/index.tsx';
+import login from './pages/login-signin/login.tsx';
 
 const router = createBrowserRouter([
   {
