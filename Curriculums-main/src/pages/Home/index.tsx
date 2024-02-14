@@ -17,7 +17,7 @@ const Home: React.FC = () => {
       {isLoading ? (
         <LoadingPage onAnimationComplete={handleAnimationComplete} />
       ) : (
-        <div className="bg-white">
+        <div className="">
           <div className="relative isolate px-6 pt-14 lg:px-8 ">
             <div className="mx-auto max-w-2xl py-10 lg:py-20">
               <div className="text-center">

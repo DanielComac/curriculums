@@ -15,7 +15,7 @@ const LoadingPage: React.FC<{ onAnimationComplete: () => void }> = ({ onAnimatio
   }, [onAnimationComplete]);
 
   return (
-    <div className="bg-white">
+    <div className="">
       <div className="mt-1 isolate px-6 lg:px-8 ">
         <div className="mx-auto max-w-2xl py-10 lg:py-20" ref={bannerRef}>
           <img
