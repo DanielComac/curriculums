@@ -176,10 +176,7 @@ export default function CurriculumCard({ cv, handleDelete }: { cv: any, handleDe
                 ) : null
             }
             <div className="flex justify-end gap-4 mt-4">
-                {/*<button className="flex justify-between items-center gap-2 rounded-md bg-sky-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:brightness-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2">
-                    Ver
-                    <FaEye className=" text-lg"/>
-                </button>*/}
+
                 <Link to={`/curriculums/edit/${cv.id}`}>
                     <button className="flex justify-between items-center gap-2 rounded-md bg-amber-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:brightness-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2">
                         Editar
